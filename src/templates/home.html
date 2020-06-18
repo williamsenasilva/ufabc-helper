@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block subtitle %}Home{% endblock %}
+{% block container_main %}
+  {% for alert,message in get_flashed_messages(with_categories=true) %}
+  {% if alert == "success" %}
+  <div class="alert alert-success">
+      {{message}}
+  </div>
+  {% elif alert == "info" %}
+  <div class="alert alert-info">
+      {{message}}
+  </div>
+  {% elif alert == "warning" %}
+  <div class="alert alert-warning">
+      {{message}}
+  </div>
+  {% elif alert == "danger" %}
+  <div class="alert alert-danger">
+      {{message}}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <div>
+    <center>
+      <h1>UFABC Helper</h1>
+    </center>
+    <section id="about">
+      <h2>Sobre</h2>
+      <p>
+        Aplicação web onde o usuário entra com sua ficha de aluno e o sistema retorna o calculo dos 
+        coeficientes CR, CA e CP - como o Portal do Aluno faz. 
+        O diferencial da aplicação é que nela o usuário pode inserir as disciplinas que está cursando e 
+        simular o cálculo dos coeficientes dependendo da nota dessas disciplinas.
+      </p>
+    </section>
+    <!-- _section-about -->
+    <section id="how-its-works">
+      <h2>Funcionamento</h2>
+      <p>
+        O aluno entra no Portal do Aluno e pega o json que é fornecido pelo próprio portal. 
+        Como na imagem abaixo. 
+      </p>
+      <center>
+        <img src="static/img/print-get-json.png">
+      </center>
+      <p>
+        O json fornecido traz todas as disciplinas já cursadas com notas, quantidade de créditos, etc. 
+        Como no exemplo abaixo.
+      </p>
+      <div class="container">
+        <pre class="prettyprint">
+          [
+            {"periodo":"2","ano":2014,"codigo":"BCS0001-13","situacao":"Aprovado","categoria":"Obrigatória","creditos":3,"disciplina":"Base Experimental das Ciências Naturais","conceito":"A"},
+            {"periodo":"2","ano":2014,"codigo":"BIL0304-13","situacao":"Aprovado","categoria":"Obrigatória","creditos":3,"disciplina":"Origem da Vida e Diversidade dos Seres Vivos","conceito":"C"}
+          ]
+        </pre>
+      </div>
+      <p>
+        Após o aluno baixar esse json ele deve entrar na aplicação web e inserir este json. 
+        A aplicação calcula CR, CA e CP e permite inclusão de novas disciplinas ou edição das existentes, 
+        resultando em novos valores dos coeficientes.
+      </p>
+    </section>
+    <!-- section-how-its-works -->
+    <section id="coding">
+      <h2>Desenvolvimento</h2>
+      <ul>
+        <li>
+          Python - interface web
+        </li>
+        <li>
+          MariaDB - banco de dados da aplicação
+        </li>
+        <li>
+          Git - versionamento
+        </li>
+      </ul>
+      </p>
+    </section>
+    <!-- section-coding -->
+  </div>
+{% endblock %}

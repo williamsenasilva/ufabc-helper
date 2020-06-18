@@ -1,0 +1,332 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block container_main %}
+<div class="card">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <td>
+          COEFICIENTE DE PROGRESSÃO (CP)
+        </td>
+        <td>
+          COEFICIENTE DE RENDIMENTO (CR)
+        </td>
+        <td>
+          COEFICIENTE DE APROVEITAMENTO (CA)
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          {{'%0.3f' % ficha.coeficiente_cp}}
+        </td>
+        <td>
+          {{'%0.3f' % ficha.coeficiente_cr}}
+        </td>
+        <td>
+          {{'%0.3f' % ficha.coeficiente_ca}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="card">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <td>
+          TIPO DE DISCIPLINA
+        </td>
+        <td>
+          QUANTIDADE
+        </td>
+        <td>
+          CRÉDITOS
+        </td>
+        <td>
+          % CONCLUÍDA
+        </td>
+        <td>
+          CARGA HORÁRIA
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          {{ ficha.tipos[0] }}
+        </td>
+        <td>
+          {{ficha.total_de_obrigatorias}}
+        </td>
+        <td>
+          {{ficha.creditos_de_obrigatorias}} de {{ficha.meta_das_obrigatorias}}
+        </td>
+        <td>
+          {{'%0.2f' % (100* ficha.creditos_de_obrigatorias / ficha.meta_das_obrigatorias)}}%
+        </td>
+        <td>
+          {{ficha.creditos_de_obrigatorias * 12}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {{ficha.tipos[1] }}
+        </td>
+        <td>
+          {{ficha.total_de_limitadas}}
+        </td>
+        <td>
+          {{ficha.creditos_de_limitadas}} de {{ficha.meta_das_limitadas}}
+        </td>
+        <td>
+          {{'%0.2f' % (100* ficha.creditos_de_limitadas / ficha.meta_das_limitadas)}}%
+        </td>
+        <td>
+          {{ficha.creditos_de_limitadas * 12}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {{ficha.tipos[2] }}
+        </td>
+        <td>
+          {{ficha.total_de_livres}}
+        </td>
+        <td>
+          {{ficha.creditos_de_livres}} de {{ficha.meta_das_livres}}
+        </td>
+        <td>
+          {{'%0.2f' % (100* ficha.creditos_de_livres / ficha.meta_das_livres)}}%
+        </td>
+        <td>
+          {{ficha.creditos_de_livres * 12}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="float-md-right">
+      <button id="button-inserir-disciplina" class="btn btn-primary" data-target="#modal-inserir-disciplina" data-toggle="modal">Adicionar Disciplina</button>
+    </div>
+    <br>
+    <br>
+  </div>
+</div>
+<div class="card">
+  {% if ficha.disciplinas|length > 0 %}
+  <table class="table table-responsive table-striped table-hover">
+    <thead>
+      <tr>
+        <td>
+          CÓDIGO
+        </td>
+        <td width="100%">
+          NOME
+        </td>
+        <td>
+          CRÉDITOS
+        </td>
+        <td>
+          CONCEITO
+        </td>
+        <td>
+          SITUAÇÃO
+        </td>
+        <td>
+          CATEGORIA
+        </td>
+        <td>
+          ANO
+        </td>
+        <td>
+          QUAD.
+        </td>
+        <td>
+          EDIT.
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for disciplina in ficha.disciplinas %}
+      <tr>
+        <td style="white-space: nowrap;">
+          {{disciplina.codigo}}
+        </td>
+        <td>
+          {{disciplina.nome.upper()}}
+        </td>
+        <td>
+          <center>
+            {{disciplina.creditos}}
+          </center>
+        </td>
+        <td>
+          <center>
+            {{disciplina.conceito}}
+          </center>
+        </td>
+        <td style="white-space: nowrap;">
+          {{disciplina.situacao}}
+        </td>
+        <td style="white-space: nowrap;">
+          {{disciplina.categoria}}
+        </td>
+        <td>
+          <center>
+            {{disciplina.ano}}
+          </center>
+        </td>
+        <td>
+          <center>
+            {{disciplina.periodo}}
+          </center>
+        </td>
+        <td>
+          <button data-target="#modal-disciplina-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" data-toggle="modal" id="button-update-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="button">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+      <div class="modal fade" id="modal-disciplina-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" role="dialog">
+        <div class="modal-dialog modal-md">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">
+                Atualização de disciplina
+              </h4>
+              <button class="close" data-dismiss="modal" type="button">
+                ×
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Disciplina:
+                <input class="form-control" disabled="disabled" id="input-nome-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="text" value="{{disciplina.nome}}">
+                </input>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Código:
+                <input class="form-control" disabled="disabled" id="input-codigo-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="text" value="{{disciplina.codigo}}">
+                </input>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Ano:
+                <input class="form-control" disabled="disabled" id="input-ano-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="text" value="{{disciplina.ano}}">
+                </input>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Período:
+                <input class="form-control" disabled="disabled" id="input-periodo-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="text" value="{{disciplina.periodo}}">
+                </input>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Conceito:
+                <select class="form-control" id="select-conceito-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}">
+                  {% for conceito in ['A','B','C','D','E','F','I','-'] %}
+                  {% if conceito == disciplina.conceito %}
+                  <option value="{{conceito}}" selected="selected">{{conceito}}</option>
+                  {% else %}
+                  <option value="{{conceito}}">{{conceito}}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input class="btn btn-default" data-dismiss="modal" id="{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" onclick="atualizarDisciplina('{{disciplina.codigo}}',{{disciplina.ano}},{{disciplina.periodo}})" type="submit">
+              </input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-inserir-disciplina" role="dialog">
+        <div class="modal-dialog modal-md">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">
+                Inserir disciplina
+              </h4>
+              <button class="close" data-dismiss="modal" type="button">
+                ×
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Disciplina:
+                <input class="form-control" id="input-nome" type="text" value="">
+                </input>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Código:
+                <input class="form-control" id="input-codigo" type="text" value="">
+                </input>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Ano:
+                <input class="form-control" id="input-ano" type="text" value="">
+                </input>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Período:
+                <select class="form-control" id="select-periodo">
+                  {% for periodo in [1,2,3] %}
+                  <option value="{{periodo}}">{{periodo}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Categoria:
+                <select class="form-control" id="select-categoria">
+                  {% for categoria in ["Obrigatória","Opção Limitada","Livre Escolha"] %}
+                  <option value="{{categoria}}">{{categoria}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Créditos:
+                <select class="form-control" id="select-creditos">
+                  {% for creditos in [1,2,3,4,5,6] %}
+                  <option value="{{creditos}}">{{creditos}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <i aria-hidden="true" class="fa fa-barcode"></i>
+                  Conceito:
+                <select class="form-control" id="select-conceito">
+                  {% for conceito in ['A','B','C','D','E','F','I','-'] %}
+                  <option value="{{conceito}}">{{conceito}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input class="btn btn-default" data-dismiss="modal" onclick="inserirDisciplina()" type="submit">
+              </input>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

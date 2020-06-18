@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{{url_for('home')}}">
+            <span class="fa fa-suitcase">
+            </span>
+            ufabc-helper
+        </a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button">
+            <i class="fa fa-bars">
+            </i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{url_for('home')}}#about" title="informações sobre o projeto">
+                        <span class="fa fa-info">
+                        </span>
+                        Sobre
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{url_for('home')}}#how-its-works" title="informações sobre o projeto">
+                        <span class="fa fa-gears">
+                        </span>
+                        Funcionamento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{url_for('home')}}#coding" title="informações sobre o projeto">
+                        <span class="fa fa-code">
+                        </span>
+                        Desenvolvimento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% if ficha %}
+                    <a class="nav-link js-scroll-trigger" href="{{url_for('listar_ficha')}}">
+                        <span class="fa fa-eye">
+                        </span>
+                        Ver Ficha
+                    </a>
+                    {% else %}
+                    <a class="nav-link js-scroll-trigger" href="{{url_for('upload_json')}}">
+                        <span class="fa fa-upload">
+                        </span>
+                        Carregar Ficha
+                    </a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="https://github.com/williamsenasilva/ufabc-helper" target="_blank" title="código fonte do projeto">
+                        <span class="fa fa-github">
+                        </span>
+                        Bitbucket
+                    </a>
+                </li>
+                {% if session.logged %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-user"></span> anônimo</a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="{{url_for('logout')}}" title="Encerrar sua sessão">
+                          <span class="fa fa-sign-out"> Sair</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
