@@ -1,0 +1,24 @@
+{
+  "name": "ufabc-helper",
+  "authors": [
+    "william <williamsenasilva@yahoo.com.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.0.0",
+    "bootstrap-filestyle": "^2.1.0",
+    "font-awesome": "^4.7.0",
+    "code-prettify": "*"
+  }
+}

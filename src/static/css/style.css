@@ -1,0 +1,76 @@
+/* Identidade Visual UFABC - http://www.ufabc.edu.br/images/aci/Manual_UFABC.pdf
+    verde  -  006633
+  amarelo  -  FFCC00
+*/
+
+body {
+    padding-top: 80px; 
+}
+
+#navbar {
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    border: none;
+    background: #006633; 
+}
+#navbar a:focus {
+    outline: none;
+}
+#navbar .navbar-brand {
+    color: white;
+}
+#navbar .navbar-brand.active,
+#navbar .navbar-brand:active,
+#navbar .navbar-brand:focus,
+#navbar .navbar-brand:hover {
+    color: white;
+}
+#navbar .navbar-nav li.nav-item a.nav-link {
+    color: white;
+}
+#navbar .navbar-nav li.nav-item a.nav-link:hover {
+    color: #cafeee;
+    outline: none;
+}
+#navbar .navbar-nav li.nav-item a.nav-link:active,
+#navbar .navbar-nav li.nav-item a.nav-link:focus {
+    color: white;
+}
+#navbar .navbar-toggler {
+    text-transform: uppercase;
+    color: white;
+    border-color: white;
+}
+#navbar .navbar-toggler:focus,
+#navbar .navbar-toggler:hover {
+    color: white;
+    border-color: #fff;
+    background-color: #cafeee;
+}
+@media (min-width: 992px) {
+    #navbar {
+ 
+    }
+    #navbar .navbar-brand {
+   
+    }
+    #navbar .navbar-nav > li.nav-item > a.nav-link.active {
+        color: white;
+        border-radius: 3px;
+        background: #18BC9C;
+    }
+    #navbar .navbar-nav > li.nav-item > a.nav-link.active:active,
+    #navbar .navbar-nav > li.nav-item > a.nav-link.active:focus,
+    #navbar .navbar-nav > li.nav-item > a.nav-link.active:hover {
+        color: white;
+        background: #18BC9C;
+    }
+    #navbar.navbar-shrink {
+      
+    }
+    #navbar.navbar-shrink .navbar-brand {
+    }
+}
+section {
+  padding: 2%;
+}
