@@ -10,7 +10,7 @@ elif os.environ.get('OPENSHIFT_MYSQL_DB_URL'):  # openshift
 elif os.environ.get('LOCALHOST_MYSQL_DB_URL'):  # localhost mariadb/mysql
     SQLALCHEMY_DATABASE_URI = os.environ.get('LOCALHOST_MYSQL_DB_URL')
 else:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ufabc-helper-database.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.path.dirname(os.path.abspath(__file__)), '../ufabc-helper-database.sqlite')
 
 # adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress warnings
 SQLALCHEMY_TRACK_MODIFICATIONS = False
