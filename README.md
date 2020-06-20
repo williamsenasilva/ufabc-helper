@@ -27,7 +27,7 @@ source ~/.bashrc
 mkvirtualenv --no-site-packages -p /usr/bin/python3 ufabc-helper
 git clone git@github.com:williamsenasilva/ufabc-helper.git
 cd ufabc-helper
-pip install -r requirements
+python install.py
 ```
 
 ## Rodar localmente
