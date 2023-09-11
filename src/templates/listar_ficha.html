@@ -124,7 +124,7 @@
         <td>
           CÓDIGO
         </td>
-        <td width="100%">
+        <td style="width:100%">
           NOME
         </td>
         <td>
@@ -160,14 +160,14 @@
           {{disciplina.nome.upper()}}
         </td>
         <td>
-          <center>
+          <div style="text-align: center;">
             {{disciplina.creditos}}
-          </center>
+          </div>
         </td>
         <td>
-          <center>
+          <div style="text-align: center;">
             {{disciplina.conceito}}
-          </center>
+          </div>
         </td>
         <td style="white-space: nowrap;">
           {{disciplina.situacao}}
@@ -176,14 +176,14 @@
           {{disciplina.categoria}}
         </td>
         <td>
-          <center>
+          <div style="text-align: center;">
             {{disciplina.ano}}
-          </center>
+          </div>
         </td>
         <td>
-          <center>
+          <div style="text-align: center;">
             {{disciplina.periodo}}
-          </center>
+          </div>
         </td>
         <td>
           <button data-target="#modal-disciplina-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" data-toggle="modal" id="button-update-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="button">
@@ -208,25 +208,21 @@
                 <i aria-hidden="true" class="fa fa-barcode"></i>
                   Disciplina:
                 <input class="form-control" disabled="disabled" id="input-nome-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="text" value="{{disciplina.nome}}">
-                </input>
               </div>
               <div class="form-group">
                 <i aria-hidden="true" class="fa fa-barcode"></i>
                   Código:
                 <input class="form-control" disabled="disabled" id="input-codigo-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="text" value="{{disciplina.codigo}}">
-                </input>
               </div>
               <div class="form-group">
                 <i aria-hidden="true" class="fa fa-barcode"></i>
                   Ano:
                 <input class="form-control" disabled="disabled" id="input-ano-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="text" value="{{disciplina.ano}}">
-                </input>
               </div>
               <div class="form-group">
                 <i aria-hidden="true" class="fa fa-barcode"></i>
                   Período:
                 <input class="form-control" disabled="disabled" id="input-periodo-{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" type="text" value="{{disciplina.periodo}}">
-                </input>
               </div>
               <div class="form-group">
                 <i aria-hidden="true" class="fa fa-barcode"></i>
@@ -244,7 +240,6 @@
             </div>
             <div class="modal-footer">
               <input class="btn btn-default" data-dismiss="modal" id="{{disciplina.codigo}}-{{disciplina.ano}}-{{disciplina.periodo}}" onclick="atualizarDisciplina('{{disciplina.codigo}}',{{disciplina.ano}},{{disciplina.periodo}})" type="submit">
-              </input>
             </div>
           </div>
         </div>
@@ -266,19 +261,16 @@
                 <i aria-hidden="true" class="fa fa-barcode"></i>
                   Disciplina:
                 <input class="form-control" id="input-nome" type="text" value="">
-                </input>
               </div>
               <div class="form-group">
                 <i aria-hidden="true" class="fa fa-barcode"></i>
                   Código:
                 <input class="form-control" id="input-codigo" type="text" value="">
-                </input>
               </div>
               <div class="form-group">
                 <i aria-hidden="true" class="fa fa-barcode"></i>
                   Ano:
                 <input class="form-control" id="input-ano" type="text" value="">
-                </input>
               </div>
               <div class="form-group">
                 <i aria-hidden="true" class="fa fa-barcode"></i>
@@ -319,7 +311,6 @@
             </div>
             <div class="modal-footer">
               <input class="btn btn-default" data-dismiss="modal" onclick="inserirDisciplina()" type="submit">
-              </input>
             </div>
           </div>
         </div>

@@ -1,73 +1,71 @@
 {% extends "layout.html" %}
 {% block head %}
-{{ super() }}
-<script src="{{ url_for('static', filename='vendor/bootstrap-filestyle/src/bootstrap-filestyle.min.js') }}"></script>
-</script>
-<script type="text/javascript">
-$(document).ready(function() {
-    console.log("teste");
-    $(":file").filestyle({
-        htmlIcon: '<span class="fa fa-file-text-o"></span> ',
-        text: "Escolha o arquivo",
-        btnClass: "btn-success",
-        dragdrop: true,
-        input: true,
-        badge: true,
-        placeholder: "Nenhum arquivo carregado",
-        buttonBefore: true
-    });
-});
-</script>
+    {{ super() }}
+    <script src="{{ url_for('static', filename='vendor/bootstrap-filestyle/src/bootstrap-filestyle.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("teste");
+            $(":file").filestyle({
+                htmlIcon: '<span class="fa fa-file-text-o"></span> ',
+                text: "Escolha o arquivo",
+                btnClass: "btn-success",
+                dragdrop: true,
+                input: true,
+                badge: true,
+                placeholder: "Nenhum arquivo carregado",
+                buttonBefore: true
+            });
+        });
+    </script>
 {% endblock %}
 {% block title %}Enviar json{% endblock %}
 {% block container_main %}
-<div class="col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
-    <h2 class="text-center">
-        Enviar documento
-    </h2>
-    <form action="{{url_for('upload_json')}}" enctype="multipart/form-data" id="form-upload-json" method="post">
-        <div class="form-group">
-            <h3>
-                <font color="#2b3c93">
-                    Selecione o arquivo
-                </font>
-            </h3>
-            <input class="filestyle" name="jsonfile" type="file">
-            </input>
-        </div>
-        <div class="form-group">
-            <h3>
-                <font color="#2b3c93">
-                    Envie
-                </font>
-            </h3>
-            <button class="btn btn-success" id="submit-send-json" type="submit">
-                <i class="fa fa-send">
-                </i>
-                Enviar
-            </button>
-        </div>
-    </form>
-    <p>
-    </p>
-    {% for alert,message in get_flashed_messages(with_categories=true) %}
-    {% if alert == "success" %}
-    <div class="alert alert-success">
-        {{message}}
+    <div class="col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
+        <h2 class="text-center">
+            Enviar documento
+        </h2>
+        <form action="{{ url_for('upload_json') }}" enctype="multipart/form-data" id="form-upload-json" method="post">
+            <div class="form-group">
+                <h3><span style="color: #2b3c93;"><label for="input-file">Selecione o arquivo</label></span></h3>
+                <input class="filestyle" id="input-file" name="jsonfile" type="file">
+            </div>
+            <div class="form-group">
+                <h3><span style="color: #2b3c93; "><label for="select-curso">Selecione o curso</label></span></h3>
+                <select class="form-control" name="select-curso">
+                    <option value="bct" selected="selected">Bacharelado em Ciência e Tecnologia</option>
+                    <option value="bcc">Bacharelado em Ciência da Computação</option>
+                    <option value="ei">Engenharia de Informação</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <h3><span style="color: #2b3c93; ">Envie</span></h3>
+                <button class="btn btn-success" id="submit-send-json" type="submit">
+                    <i class="fa fa-send">
+                    </i>
+                    Enviar
+                </button>
+            </div>
+        </form>
+        <p>
+        </p>
+        {% for alert,message in get_flashed_messages(with_categories=true) %}
+            {% if alert == "success" %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% elif alert == "info" %}
+                <div class="alert alert-info">
+                    {{ message }}
+                </div>
+            {% elif alert == "warning" %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                </div>
+            {% elif alert == "danger" %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
-    {% elif alert == "info" %}
-    <div class="alert alert-info">
-        {{message}}
-    </div>
-    {% elif alert == "warning" %}
-    <div class="alert alert-warning">
-        {{message}}
-    </div>
-    {% elif alert == "danger" %}
-    <div class="alert alert-danger">
-        {{message}}
-    </div>
-    {% endif %}
-    {% endfor %}
-</div>
 {% endblock %}
